@@ -1,0 +1,38 @@
+---
+import type { Species, Status } from '../types/api'
+interface Props {
+    id: number
+    name: string
+    img: string
+    status: Status
+    specie: Species
+    created: Date
+}
+
+const {id, name, img, status, specie, created} = Astro.props
+const whatSpecie = specie === 'Human' ? true : false 
+const whatStatus = status === 'Alive' ? true : false
+---
+
+<card class="rounded-lg max-w-xs border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col text-center">
+    <picture class="flex justify-center p-4">
+        <img class="mb-5 rounded-lg" src={img} alt={name}/>
+    </picture>
+    <header class="p-4 flex-grow">
+        <span class={
+            `text-sm font-semibold mr-2 px-2.5 py-0.5 rounded
+            ${whatSpecie ? " text-green-400" : " text-gray-200"}`
+        }>
+        {specie}
+        </span>
+        <h2 class="my-2 text-2xl font-bold tracking-tight text-white">{name}</h2>
+        <span class={`text-sm my-2 text-white rounded-lg px-2 py-1
+        ${whatStatus ? "bg-green-200 text-green-900" : "bg-gray-600 text-white"}`}>
+            {status}
+        </span>
+        
+        <p class="opacity-30 my-3">{created}</p>
+    </header>
+    <span class="my-2 text-center text-white opacity-50">#{id}</span>
+    
+</card>

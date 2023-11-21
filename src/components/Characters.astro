@@ -1,0 +1,23 @@
+---
+import getCharacters from '../services/getCharacters'
+import { type CharactersType } from '../types/api'
+import CardCharacter from './CardCharacter.astro';
+
+const info= await getCharacters()
+console.log(info)
+---
+
+<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+        info?.map( (character: CharactersType) => (
+            <CardCharacter 
+            id={character.id}
+            name={character.name}
+            status={character.status}
+            specie={character.species}
+            created={character.created}
+            img={character.image}
+            />
+        ))
+    }
+</div>
